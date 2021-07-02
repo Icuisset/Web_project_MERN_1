@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 // eslint-disable-next-line no-multiple-empty-lines
@@ -136,5 +137,24 @@ module.exports.updateUserAvatar = (req, res) => {
       return res.status(500).send({
         message: 'user not updated',
       });
+    });
+};
+
+/** manage LOG IN */
+module.exports.logIn = (req, res) => {
+  const { email, password } = req.body;
+
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.sign({ _id: user._id }, 'super-strong-secret', {
+        expiresIn: '7d',
+      });
+      res.cookie('token', token, { httpOnly: true });
+      res.send({
+        token,
+      });
+    })
+    .catch((err) => {
+      res.status(401).send({ message: err.message });
     });
 };

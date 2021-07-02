@@ -6,7 +6,6 @@ const router = express.Router();
 const {
   getUsers,
   findUser,
-  createUser,
   updateUserProfile,
   updateUserAvatar,
 } = require('../controllers/users');
@@ -14,8 +13,6 @@ const {
 router.get('/', getUsers);
 
 router.get('/:id', findUser);
-
-router.post('/', createUser);
 
 router.patch('/me', updateUserProfile);
 
