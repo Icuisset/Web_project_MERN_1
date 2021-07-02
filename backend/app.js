@@ -13,6 +13,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
 
+const auth = require('./middleware/auth');
+
 mongoose.connect('mongodb://localhost:27017/arounddb', {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -33,7 +35,7 @@ app.use((req, res, next) => {
 
 app.post('/signin', logIn);
 app.post('/signup', createUser);
-
+app.use(auth);
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
 
