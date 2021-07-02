@@ -8,16 +8,19 @@ const userSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
     required: true,
+    default: 'Jacques Cousteau',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
     required: true,
+    default: 'Explorer',
   },
   avatar: {
     type: String,
     required: true,
+    default: 'https://pictures.s3.yandex.net/resources/avatar_1604080799.jpg',
   },
   email: {
     type: String,
@@ -36,7 +39,7 @@ const userSchema = new mongoose.Schema({
 },
 { versionKey: false });
 
-/** URL VALIDATION RULE */
+/** URL VALIDATION RULE USING REGEX */
 // eslint-disable-next-line func-names
 const validationRule = function (value) {
   return /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/.test(value);
