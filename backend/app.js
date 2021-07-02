@@ -17,12 +17,6 @@ mongoose.connect('mongodb://localhost:27017/arounddb', {
   useFindAndModify: false,
 });
 
-// const path = require('path');
-
-// READ ME in the practicum project asks to create a PUBLIC folder for static built from React
-// I'm leaving the PUBLIC folder in my project as it might be useful for next sprint :-)
-// app.use(express.static(path.resolve(__dirname, 'public')));
-
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 
