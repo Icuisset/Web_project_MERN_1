@@ -1,0 +1,39 @@
+@import url('./_value/popup__input_value_name.css');
+@import url('./_value/popup__input_value_about.css');
+@import url('./_value/popup__input_value_placeTitle.css');
+@import url('./_value/popup__input_value_placeImageLink.css');
+@import url('./_value/popup__input_value_newAvatarLink.css');
+@import url('./_type/popup__input_type_error.css');
+
+.popup__input {
+  width: 100%;
+  padding: 0 0 13px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+}
+
+::placeholder {
+  color: black;
+  font-size: 14px;
+  line-height: 17px;
+  opacity: 1;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: black;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: black;
+}
+
+.popup__input:focus {
+  outline: none;
+}

@@ -1,0 +1,9 @@
+.popup__input_value_placeImageLink {
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__input_value_placeImageLink {
+    margin-top: 20px;
+  }
+}

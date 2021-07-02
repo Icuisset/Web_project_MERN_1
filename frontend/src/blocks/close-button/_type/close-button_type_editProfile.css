@@ -1,0 +1,19 @@
+.close-button_type_editProfile {
+  background-image: url('../../../images/close-icon-rotated.svg');
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (max-width: 650px) {
+  .close-button_type_editProfile {
+    background-image: url('../../../images/close-icon-rotated-small.svg');
+    width: 21px;
+    height: 21px;
+    top: -43px;
+    right: 7px;
+  }
+}

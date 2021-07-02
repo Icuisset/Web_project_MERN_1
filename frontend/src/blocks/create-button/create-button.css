@@ -1,0 +1,21 @@
+.create-button {
+  margin-top: 48px;
+  margin-bottom: 20px;
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 650px) {
+  .create-button {
+    margin-top: 36px;
+    width: 200px;
+    height: 40px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

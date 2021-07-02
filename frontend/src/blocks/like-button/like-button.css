@@ -1,0 +1,23 @@
+.like-button {
+  padding: 0;
+  background-color: transparent;
+  background-image: url('../../images/like-icon.svg');
+  border: none;
+  width: 21px;
+  height: 19px;
+  transition: opacity 0.3s ease;
+}
+
+.like-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.like-button:focus {
+  outline: none;
+}
+
+/*
+import for like-button_activated has been declared in index.css, 
+otherwise background-image doesn't get overrrun by new class
+*/

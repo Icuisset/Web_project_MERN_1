@@ -1,0 +1,15 @@
+.header__email {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 24px;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+@media screen and (max-width: 650px) {
+    .header__email {
+        margin-right: 0;
+        font-size: 16px;
+        line-height: 20px;
+    }
+}

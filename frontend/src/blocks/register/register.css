@@ -1,0 +1,13 @@
+@import url('./__form/register__form.css');
+@import url('./__title/register__title.css');
+@import url('./__input/register__input.css');
+@import url('./__button/register__button.css');
+@import url('./__caption/register__caption.css');
+
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  

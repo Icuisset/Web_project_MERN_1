@@ -1,0 +1,17 @@
+@import url('./_type/close-button_type_editProfile.css');
+@import url('./_type/close-button_type_newPlace.css');
+@import url('./_type/close-button_type_newAvatar.css');
+@import url('./_type/close-button_type_picture.css');
+
+.close-button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.close-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

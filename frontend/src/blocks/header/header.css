@@ -1,0 +1,25 @@
+@import url('./__navigation/header__navigation.css');
+@import url('./__email/header__email.css');
+@import url('./__link/header__link.css');
+
+.header {
+  width: calc(100% * (880 / 1280));
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 45px;
+  padding-bottom: 41px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+    padding-top: 28px;
+    padding-bottom: 32px;
+    flex-direction: column-reverse;
+    align-items : center;
+  }
+}

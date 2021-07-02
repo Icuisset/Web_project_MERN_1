@@ -1,0 +1,6 @@
+.popup_type_confirmDelete {
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}

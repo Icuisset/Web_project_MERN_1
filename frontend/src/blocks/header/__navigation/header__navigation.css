@@ -1,0 +1,21 @@
+.header__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 650px) {
+    .header__navigation {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .header__navigation {
+      margin-bottom: 40px;;
+      flex-direction: column-reverse;
+      align-items : flex-start;
+      align-self: flex-start;
+    }
+  }

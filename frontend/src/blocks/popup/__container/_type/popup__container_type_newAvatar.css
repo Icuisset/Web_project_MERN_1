@@ -1,0 +1,13 @@
+.popup__container_type_newAvatar {
+  background-color: white;
+  border-radius: 10px;
+  min-width: 430px;
+  min-height: 330px;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__container_type_newAvatar {
+    min-width: 240px;
+    min-height: 258px;
+  }
+}

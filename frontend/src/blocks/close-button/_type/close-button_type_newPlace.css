@@ -1,0 +1,19 @@
+.close-button_type_newPlace {
+  background-image: url('../../../images/close-icon-rotated.svg');
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (max-width: 650px) {
+  .close-button_type_newPlace {
+    background-image: url('../../../images/close-button-newplace-mobile.png');
+    width: 24px;
+    height: 24px;
+    top: -25px;
+    right: -25px;
+  }
+}

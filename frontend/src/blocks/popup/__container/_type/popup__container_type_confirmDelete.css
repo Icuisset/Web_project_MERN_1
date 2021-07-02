@@ -1,0 +1,12 @@
+.popup__container_type_confirmDelete {
+  background-color: white;
+  border-radius: 10px;
+  min-width: 430px;
+  min-height: 181px;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__container_type_confirmDelete {
+    min-width: 240px;
+  }
+}

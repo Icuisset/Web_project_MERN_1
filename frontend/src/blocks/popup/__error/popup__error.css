@@ -1,0 +1,5 @@
+@import url('./_visible/popup__error_visible.css');
+
+.popup__error {
+  align-self: flex-start;
+}

@@ -1,0 +1,13 @@
+.popup__button {
+  background-color: black;
+  text-transform: capitalize;
+  color: white;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.popup__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

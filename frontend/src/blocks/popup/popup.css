@@ -1,0 +1,30 @@
+@import url('./_type/popup_type_editProfile.css');
+@import url('./_type/popup_type_newPlace.css');
+@import url('./_type/popup_type_newAvatar.css');
+@import url('./_type/popup_type_picture.css');
+@import url('./_type/popup_type_confirmDelete.css');
+@import url('./_type/popup_type_tooltip.css');
+@import url('./__overlay/popup__overlay.css');
+@import url('./__container/popup__container.css');
+@import url('./__title/popup__title.css');
+@import url('./__form/popup__form.css');
+@import url('./__input/popup__input.css');
+@import url('./__error/popup__error.css');
+@import url('./__button/popup__button.css');
+@import url('./__button/_disabled/popup__button_disabled.css');
+@import url('./__picture/popup__picture.css');
+@import url('./__picture-caption/popup__picture-caption.css');
+@import url('./__message/popup__message.css');
+@import url('./__icon/popup__icon.css');
+
+.popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: 'Inter', Arial, sans-serif;
+}

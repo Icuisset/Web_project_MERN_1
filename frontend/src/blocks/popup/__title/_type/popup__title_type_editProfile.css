@@ -1,0 +1,10 @@
+.popup__title_type_editProfile {
+  margin-bottom: 54px;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 650px) {
+  .popup__title_editProfile {
+    margin-bottom: 75px;
+  }
+}
