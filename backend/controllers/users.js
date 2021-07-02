@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 // eslint-disable-next-line no-multiple-empty-lines
@@ -51,12 +52,18 @@ module.exports.createUser = (req, res) => {
     name,
     about,
     avatar,
+    email,
+    password,
   } = req.body;
-  User.create({
-    name,
-    about,
-    avatar,
-  })
+
+  bcrypt.hash(password, 10)
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => {
       res.status(200).send(user);
     })
