@@ -51,7 +51,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * initial call to api to get all cards from api
@@ -67,7 +67,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, [token]);
+  }, []);
 
   /**
    * handle all general click actions
@@ -241,6 +241,9 @@ function App() {
         }
         setUserEmail(email);
         console.log(email);
+        setToken(result.token);
+        localStorage.setItem('token', result.token);
+        console.log(result.token);
         history.push("/");
       })
       .catch((err) => {
