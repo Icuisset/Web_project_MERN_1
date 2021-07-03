@@ -46,6 +46,32 @@ module.exports.findUser = (req, res) => {
     });
 };
 
+/** GET /users/me - returns current user */
+module.exports.findCurrentUser = (req, res) => {
+  console.log(req.user._id);
+  User.findById(req.user._id)
+    .then((user) => {
+      if (user) {
+        res.status(200).send(user);
+      } else {
+        res.status(404).send({
+          message: 'Current user not found',
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err.name);
+      if (err.name === 'CastError') {
+        return res.status(400).send({
+          message: 'Current user Id is not valid',
+        });
+      }
+      return res.status(500).send({
+        message: 'Current user not found',
+      });
+    });
+};
+
 /** POST /users — creates a new user  */
 module.exports.createUser = (req, res) => {
   console.log(req.body);

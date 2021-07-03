@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 app.post('/signin', logIn);
 app.post('/signup', createUser);
-app.use(auth);
+
 app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
 
