@@ -26,7 +26,7 @@ const cardsRouter = require('./routes/cards');
 
 const { logIn, createUser } = require('./controllers/users');
 
-/* REMOVING HARD CODED USER ID
+/* KEEPING HARD CODE HANDY FOR TEST PURPOSE
 app.use((req, res, next) => {
   req.user = {
     _id: '60c465843b70e8326ce24c57', // my test_user id in Postman

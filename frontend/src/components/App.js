@@ -33,6 +33,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSuccessful, setIsSuccessful] = React.useState(false);
 
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
   const history = useHistory();
 
   /**
@@ -41,7 +43,7 @@ function App() {
 
   useEffect(() => {
     api
-      .getUserInfo()
+      .getUserInfo(token)
       .then((result) => {
         console.log(result);
         setCurrentUser(result);
@@ -49,7 +51,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * initial call to api to get all cards from api
@@ -57,7 +59,7 @@ function App() {
 
   useEffect(() => {
     api
-      .getInitialCards()
+      .getInitialCards(token)
       .then((result) => {
         setCards(result);
         console.log(result);
@@ -65,7 +67,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [token]);
 
   /**
    * handle all general click actions
@@ -108,7 +110,7 @@ function App() {
 
   const handleUpdateUser = ({ name, about }) => {
     api
-      .editUserInfo(name, about)
+      .editUserInfo(name, about, token)
       .then((result) => {
         console.log(result);
         setCurrentUser(result);
@@ -121,7 +123,7 @@ function App() {
 
   const handleUpdateAvatar = ({ avatar }) => {
     api
-      .editUserAvatar(avatar)
+      .editUserAvatar(avatar, token)
       .then((result) => {
         console.log(result);
         setCurrentUser(result);
@@ -135,7 +137,7 @@ function App() {
   const handleAddPlaceSubmit = ({ title, link }) => {
     console.log(title, link);
     api
-      .postNewCard(title, link)
+      .postNewCard(title, link, token)
       .then((newCard) => {
         console.log(newCard);
         setCards([newCard, ...cards]);
@@ -154,7 +156,7 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     if (isLiked === false) {
       api
-        .addCardLike(card._id)
+        .addCardLike(card._id, token)
         .then((newCard) => {
           console.log(newCard);
           setCards((state) =>
@@ -166,7 +168,7 @@ function App() {
         });
     } else {
       api
-        .removeCardLike(card._id)
+        .removeCardLike(card._id, token)
         .then((newCard) => {
           setCards((state) =>
             state.map((c) => (c._id === card._id ? newCard : c))
@@ -180,7 +182,7 @@ function App() {
 
   const handleCardDelete = (card) => {
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, token)
       .then((result) => {
         console.log(result);
         const newCards = cards.filter((c) => c._id !== card._id);
