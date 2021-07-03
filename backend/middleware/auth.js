@@ -2,21 +2,20 @@
 const jwt = require("jsonwebtoken");
 
 const handleAuthError = (res) => {
-  res.status(401).send({ message: "Authorization Error" });
+  res.status(401).send({ message: "Authorisation Error" });
 };
 
 const extractBearerToken = (header) => header.replace("Bearer ", "");
 
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
-  console.log(authorization);
+  const { authorisation } = req.headers;
 
-  if (!authorization || !authorization.startsWith("Bearer ")) {
+  if (!authorisation || !authorisation.startsWith("Bearer ")) {
     return handleAuthError(res);
   }
 
-  const token = extractBearerToken(authorization);
+  const token = extractBearerToken(authorisation);
   let payload;
 
   try {

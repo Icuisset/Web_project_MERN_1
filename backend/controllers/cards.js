@@ -46,11 +46,11 @@ module.exports.createCard = (req, res) => {
 module.exports.deleteCard = (req, res) => {
   Card.findByIdAndDelete(req.params.cardId)
     .then((card) => {
-      if (card) {
+      if (card && (req.user._id.toString() === card.owner.toString())) {
         res.status(200).send(card);
       } else {
         res.status(404).send({
-          message: 'cardId not found',
+          message: 'cardId not found or User does not have the rights to delete this card',
         });
       }
     })
