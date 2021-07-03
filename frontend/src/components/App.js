@@ -42,6 +42,7 @@ function App() {
    */
 
   useEffect(() => {
+    if (token) {
     api
       .getUserInfo(token)
       .then((result) => {
@@ -51,13 +52,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }}, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * initial call to api to get all cards from api
    */
 
   useEffect(() => {
+    if (token) {
     api
       .getInitialCards(token)
       .then((result) => {
@@ -67,7 +69,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }}, [token]);
 
   /**
    * handle all general click actions
