@@ -1,30 +1,29 @@
+/* eslint-disable quotes */
 /* eslint-disable no-console */
-const express = require('express');
-const mongoose = require('mongoose');
-const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const helmet = require("helmet");
+const cookieParser = require("cookie-parser");
 
 const app = express();
-const {
-  PORT = 3000,
-} = process.env;
+const { PORT = 3000 } = process.env;
 
 app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
 
-const auth = require('./middleware/auth');
+const auth = require("./middleware/auth");
 
-mongoose.connect('mongodb://localhost:27017/arounddb', {
+mongoose.connect("mongodb://localhost:27017/arounddb", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
 
-const usersRouter = require('./routes/users');
-const cardsRouter = require('./routes/cards');
+const usersRouter = require("./routes/users");
+const cardsRouter = require("./routes/cards");
 
-const { logIn, createUser } = require('./controllers/users');
+const { logIn, createUser } = require("./controllers/users");
 
 /* KEEPING HARD CODE HANDY FOR TEST PURPOSE
 app.use((req, res, next) => {
@@ -35,14 +34,23 @@ app.use((req, res, next) => {
 });
 */
 
-app.post('/signin', logIn);
-app.post('/signup', createUser);
-app.use('/users', auth, usersRouter);
-app.use('/cards', auth, cardsRouter);
+app.post("/signin", logIn);
+app.post("/signup", createUser);
+app.use("/users", auth, usersRouter);
+app.use("/cards", auth, cardsRouter);
 
-app.get('*', (req, res) => {
+app.get("*", (req, res) => {
   res.status(404).send({
-    message: 'Requested resource not found',
+    message: "Requested resource not found",
+  });
+});
+
+app.use((err, req, res, next) => {
+  // if an error has no status, display 500
+  const { statusCode = 500, message } = err;
+  res.status(statusCode).send({
+    // check the status and display a message based on it
+    message: statusCode === 500 ? "An error occurred on the server" : message,
   });
 });
 
