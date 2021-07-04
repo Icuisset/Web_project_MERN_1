@@ -11,9 +11,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Error400 = require("../middleware/errors/Error400");
-const Error401 = require("../middleware/errors/Error401");
 const Error404 = require("../middleware/errors/Error404");
-const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
 
