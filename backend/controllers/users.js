@@ -12,6 +12,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
+const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
 
@@ -112,14 +113,12 @@ module.exports.createUser = (req, res) => {
     .then((user) => {
       res.status(200).send(user);
     })
-    /*
     .catch((err) => {
       console.log(err.name);
       res.status(500).send({
         message: "user not created",
       });
-    }); */
-    .catch(next);
+    });
 };
 
 /** PATCH /users/me — update profile with my name and about */
