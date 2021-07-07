@@ -8,8 +8,10 @@
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
 const Error500 = require("../middleware/errors/Error500");
@@ -17,53 +19,38 @@ const Error500 = require("../middleware/errors/Error500");
 // eslint-disable-next-line no-multiple-empty-lines
 
 /** GET /users — returns all users */
-module.exports.getUsers = (req, res) => {
+module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
+      if (users === undefined) {
+        throw new Error404("No users found");
+      }
       res.status(200).send(users);
     })
-    /*
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send({
-        message: 'users not found',
-      });
-    }); */
     .catch(next);
 };
 
 /** GET /users/:userId - returns a user by _id */
-module.exports.findUser = (req, res) => {
+module.exports.findUser = (req, res, next) => {
   User.findById(req.params.id)
     .then((user) => {
       if (user) {
         res.status(200).send(user);
       } else {
         throw new Error404("userId not found");
-        /* res.status(404).send({
-          message: 'userId not found',
-        }); */
       }
     })
     .catch((err) => {
       console.log(err.name);
       if (err.name === "CastError") {
         throw new Error400("Id is not valid");
-        /*
-        return res.status(400).send({
-          message: 'Id is not valid',
-        }); */
       }
-      /*
-      return res.status(500).send({
-        message: 'user not found',
-      }); */
     })
     .catch(next);
 };
 
 /** GET /users/me - returns current user */
-module.exports.findCurrentUser = (req, res) => {
+module.exports.findCurrentUser = (req, res, next) => {
   console.log(req.user._id);
   User.findById(req.user._id)
     .then((user) => {
@@ -71,30 +58,18 @@ module.exports.findCurrentUser = (req, res) => {
         res.status(200).send(user);
       } else {
         throw new Error404("Current user not found");
-        /*
-        res.status(404).send({
-          message: 'Current user not found',
-        }); */
       }
     })
     .catch((err) => {
       console.log(err.name);
       if (err.name === "CastError") {
         throw new Error400("Current user Id is not valid");
-        /*
-        return res.status(400).send({
-          message: 'Current user Id is not valid',
-        }); */
       }
-      /*
-      return res.status(500).send({
-        message: 'Current user not found',
-      }); */
     })
     .catch(next);
 };
 
-/** POST /users — creates a new user  */
+/** POST /users — creates a new user in SIGNUP */
 module.exports.createUser = (req, res) => {
   console.log(req.body);
   const { name, about, avatar, email, password } = req.body;
@@ -122,7 +97,7 @@ module.exports.createUser = (req, res) => {
 };
 
 /** PATCH /users/me — update profile with my name and about */
-module.exports.updateUserProfile = (req, res) => {
+module.exports.updateUserProfile = (req, res, next) => {
   console.log(req.body);
   const filter = {
     _id: req.user._id,
@@ -148,21 +123,13 @@ module.exports.updateUserProfile = (req, res) => {
         throw new Error400(
           "Validation failed : the format of the request is not valid"
         );
-        /*
-        return res.status(400).send({
-          message: "Validation failed : the format of the request is not valid",
-        }); */
       }
-      /*
-      return res.status(500).send({
-        message: "user not updated",
-      }); */
     })
     .catch(next);
 };
 
 /** PATCH /users/me/avatar — update profile with my avatar */
-module.exports.updateUserAvatar = (req, res) => {
+module.exports.updateUserAvatar = (req, res, next) => {
   console.log(req.body);
   const filter = {
     _id: req.user._id,
@@ -201,8 +168,9 @@ module.exports.updateUserAvatar = (req, res) => {
     .catch(next);
 };
 
-/** manage LOG IN */
-module.exports.logIn = (req, res) => {
+/** manage SIGN IN */
+
+module.exports.signin = (req, res) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)

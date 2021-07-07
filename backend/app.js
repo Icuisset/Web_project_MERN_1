@@ -33,7 +33,7 @@ mongoose.connect("mongodb://localhost:27017/arounddb", {
 const usersRouter = require("./routes/users");
 const cardsRouter = require("./routes/cards");
 
-const { logIn, createUser } = require("./controllers/users");
+const { signin, createUser } = require("./controllers/users");
 
 /* KEEPING HARD CODE HANDY FOR TEST PURPOSE
 app.use((req, res, next) => {
@@ -52,7 +52,7 @@ app.post(
       password: Joi.string().required(),
     }),
   }),
-  logIn
+  signin
 );
 
 app.post(
