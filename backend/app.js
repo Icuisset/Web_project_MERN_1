@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const { celebrate, Joi, errors } = require("celebrate");
 const cookieParser = require("cookie-parser");
+// eslint-disable-next-line no-unused-vars
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json(), cors(corsOptions));
 app.use(helmet());
 app.use(cookieParser());
 
+const { requestLog, errorLog } = require("./middleware/logger");
 const auth = require("./middleware/auth");
 
 mongoose.connect("mongodb://localhost:27017/arounddb", {
@@ -35,14 +37,13 @@ const cardsRouter = require("./routes/cards");
 
 const { signin, createUser } = require("./controllers/users");
 
-/* KEEPING HARD CODE HANDY FOR TEST PURPOSE
-app.use((req, res, next) => {
-  req.user = {
-    _id: '60c465843b70e8326ce24c57', // my test_user id in Postman
-  };
-  next();
+app.use(requestLog);
+
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("Server will crash now");
+  }, 0);
 });
-*/
 
 app.post(
   "/signin",
@@ -77,6 +78,12 @@ app.get("*", (req, res) => {
     message: "Requested resource not found",
   });
 });
+
+// Error log
+app.use(errorLog);
+
+// Error handler from Celebrate
+app.use(errors());
 
 app.use((err, req, res, next) => {
   // if an error has no status, display 500

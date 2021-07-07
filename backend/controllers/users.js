@@ -8,12 +8,14 @@
 /* eslint-disable no-console */
 /* eslint-disable linebreak-style */
 const bcrypt = require("bcryptjs");
+// eslint-disable-next-line no-unused-vars
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
+// eslint-disable-next-line no-unused-vars
 const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
@@ -154,22 +156,12 @@ module.exports.updateUserAvatar = (req, res, next) => {
         throw new Error400(
           "Validation failed : the format of the url is not valid"
         );
-        /*
-        return res.status(400).send({
-          message: "Validation failed : the format of the url is not valid",
-        }); */
       }
-      /*
-      return res.status(500).send({
-        message: "user not updated",
-      });
-      */
     })
     .catch(next);
 };
 
 /** manage SIGN IN */
-
 module.exports.signin = (req, res) => {
   const { email, password } = req.body;
 
