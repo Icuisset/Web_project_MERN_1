@@ -4,7 +4,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const helmet = require("helmet");
-const cors = require("cors");
+// const cors = require("cors");
 const { celebrate, Joi, errors } = require("celebrate");
 const cookieParser = require("cookie-parser");
 // eslint-disable-next-line no-unused-vars
@@ -23,6 +23,7 @@ const corsOptions = {
 app.use(express.json(), cors(corsOptions));
 */
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 
