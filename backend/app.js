@@ -34,6 +34,7 @@ mongoose.connect("mongodb://localhost:27017/arounddb", {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 const usersRouter = require("./routes/users");
