@@ -30,7 +30,11 @@ app.use(cookieParser());
 const { requestLog, errorLog } = require("./middleware/logger");
 const auth = require("./middleware/auth");
 
-mongoose.connect("mongodb://localhost:27017/arounddb", {
+// eslint-disable-next-line operator-linebreak
+const uri =
+  "mongodb+srv://isa:XEPhas731@@isabelledb.mltad.mongodb.net/arounddb?retryWrites=true&w=majority";
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
