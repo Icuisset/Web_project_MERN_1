@@ -63,7 +63,7 @@ class Authorize {
 
 
 const authorize = new Authorize({
-  baseUrl: 'https://register.nomoreparties.co',
+  baseUrl: 'https://www.theworldaround.co.uk/api/',
 })
 
 export default authorize;

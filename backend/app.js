@@ -13,7 +13,6 @@ const bodyParser = require("body-parser");
 const app = express();
 const { PORT = 3000 } = process.env;
 
-/* Creates an error when sending requests to api
 const corsOptions = {
   origin: "*",
   // credentials: true,
@@ -21,7 +20,7 @@ const corsOptions = {
 };
 
 app.use(express.json(), cors(corsOptions));
-*/
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());

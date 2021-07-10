@@ -113,7 +113,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/group-7',
+  baseUrl: 'https://www.theworldaround.co.uk/api/',
 })
 
 export default api;
