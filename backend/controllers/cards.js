@@ -47,7 +47,7 @@ module.exports.createCard = (req, res) => {
 };
 
 /** DELETE /cards/:cardId — deletes a card by _id */
-module.exports.deleteCard = (req, res) => {
+module.exports.deleteCard = (req, res, next) => {
   Card.findByIdAndDelete(req.params.cardId)
     .then((card) => {
       if (card && (req.user._id.toString() === card.owner.toString())) {
