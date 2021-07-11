@@ -86,8 +86,8 @@ app.post(
   createUser
 );
 
-app.use("/users", auth, usersRouter);
-app.use("/cards", auth, cardsRouter);
+app.use("/api/users", auth, usersRouter);
+app.use("/api/cards", auth, cardsRouter);
 
 app.get("*", (req, res) => {
   res.status(404).send({
