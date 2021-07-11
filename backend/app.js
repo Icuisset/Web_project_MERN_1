@@ -62,7 +62,7 @@ app.get("/crash-test", () => {
 });
 
 app.post(
-  "api/signin",
+  "/api/signin",
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -73,7 +73,7 @@ app.post(
 );
 
 app.post(
-  "api/signup",
+  "/api/signup",
   celebrate({
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
