@@ -77,7 +77,7 @@ module.exports.deleteCard = (req, res, next) => {
 };
 
 /** PUT /cards/:cardId/likes — like a card */
-module.exports.likeCard = (req, res) => {
+module.exports.likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.cardId, {
     $addToSet: {
       likes: req.user._id,
@@ -114,7 +114,7 @@ module.exports.likeCard = (req, res) => {
 };
 
 /** DELETE /cards/:cardId/likes — dislike a card */
-module.exports.dislikeCard = (req, res) => {
+module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(req.params.cardId, {
     $pull: {
       likes: req.user._id,
@@ -146,5 +146,6 @@ module.exports.dislikeCard = (req, res) => {
       return res.status(500).send({
         message: 'like not removed',
       });
-    });
+    })
+    .catch(next);
 };
