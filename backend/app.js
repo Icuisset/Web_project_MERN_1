@@ -12,7 +12,6 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const app = express();
-// const { PORT = 3000 } = process.env;
 const { DB_CONNECT, PORT = 3000 } = process.env;
 
 const corsOptions = {
