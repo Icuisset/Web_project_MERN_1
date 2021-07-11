@@ -13,10 +13,12 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+require("dotenv").config();
+
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
-// eslint-disable-next-line no-unused-vars
-const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
 
@@ -167,9 +169,13 @@ module.exports.signin = (req, res) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, "super-strong-secret", {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === "production" ? JWT_SECRET : "super-strong-secret",
+        {
+          expiresIn: "7d",
+        }
+      );
       res.cookie("token", token, { httpOnly: true });
       res.send({
         token,

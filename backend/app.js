@@ -9,9 +9,11 @@ const { celebrate, Joi, errors } = require("celebrate");
 const cookieParser = require("cookie-parser");
 // eslint-disable-next-line no-unused-vars
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const app = express();
-const { PORT = 3000 } = process.env;
+// const { PORT = 3000 } = process.env;
+const { DB_CONNECT, PORT = 3000 } = process.env;
 
 const corsOptions = {
   origin: "*",
@@ -33,11 +35,11 @@ const { requestLog, errorLog } = require("./middleware/logger");
 const auth = require("./middleware/auth");
 
 // eslint-disable-next-line operator-linebreak
-const uri =
-  "mongodb+srv://isa:XEPhas731@@isabelledb.mltad.mongodb.net/arounddb?retryWrites=true&w=majority";
+// const uri =
+//  "mongodb+srv://isa:XEPhas731@@isabelledb.mltad.mongodb.net/arounddb?retryWrites=true&w=majority";
 
 mongoose
-  .connect(uri, {
+  .connect(DB_CONNECT, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
