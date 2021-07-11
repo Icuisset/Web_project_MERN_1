@@ -7,13 +7,13 @@ function Card(props) {
   /**
    * control visibility of delete button
    */
-  const isUserCard = props.card.owner._id === user._id;
+  const isUserCard = props.card.owner === user._id;
   const visibilityState = isUserCard ? "visible" : "hidden";
 
   /**
    * control style of like icon
    */
-  const isLikedbyUser = props.card.likes.some((like) => like._id === user._id);
+  const isLikedbyUser = props.card.likes.includes(user._id);
   const cardLikeClassName = `${
     isLikedbyUser ? "like-button like-button_activated" : "like-button"
   }`;

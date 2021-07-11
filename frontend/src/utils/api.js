@@ -14,7 +14,7 @@ class Api {
   }
 
 
-  //GET https://around.nomoreparties.co/v1/group-7/cards
+  //GET https://www.api.theworldaround.co.uk/cards
   getInitialCards(token) {
     return fetch(this._baseUrl + '/cards', {
       headers: {
@@ -24,7 +24,7 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // GET https://around.nomoreparties.co/v1/group-7/users/me
+  // GET https://www.api.theworldaround.co.uk/users/me
   getUserInfo(token) {
     return fetch(this._baseUrl + '/users/me', {
       headers: {
@@ -34,7 +34,7 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // PATCH https://around.nomoreparties.co/v1/group-7/users/me
+  // PATCH https://www.api.theworldaround.co.uk/users/me
   editUserInfo(name, about, token) {
     return fetch(this._baseUrl + '/users/me', {
       method: 'PATCH',
@@ -49,7 +49,7 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // POST https://around.nomoreparties.co/v1/group-7/cards
+  // POST https://www.api.theworldaround.co.uk/cards
   postNewCard(name, link, token) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
@@ -64,7 +64,7 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // DELETE https://around.nomoreparties.co/v1/group-7/cards/cardId
+  // DELETE https://www.api.theworldaround.co.uk/cards/cardId
   deleteCard(id, token) {
     return fetch(this._baseUrl + '/cards/' + id, {
       method: 'DELETE',
@@ -75,9 +75,9 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // PUT https://around.nomoreparties.co/v1/group-7/cards/likes/cardId
+  // PUT https://www.api.theworldaround.co.uk/cards/cardId/likes
   addCardLike(id, token) {
-    return fetch(this._baseUrl + '/cards/likes/' + id, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -86,9 +86,9 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // DELETE https://around.nomoreparties.co/v1/group-7/cards/likes/cardId
+  // DELETE https://www.api.theworldaround.co.uk/cards/cardId/likes
   removeCardLike(id, token) {
-    return fetch(this._baseUrl + '/cards/likes/' + id, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -97,7 +97,7 @@ class Api {
     }).then((res) => this._checkResponse(res))
   }
 
-  // PATCH https://around.nomoreparties.co/v1/group-7/users/me/avatar
+  // PATCH www.api.theworldaround.co.uk/users/me/avatar
   editUserAvatar(avatar, token) {
     return fetch(this._baseUrl + '/users/me/avatar', {
       method: 'PATCH',
