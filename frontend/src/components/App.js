@@ -263,8 +263,8 @@ function App() {
     authorize
       .checkTokenIsValid(JWT)
       .then((result) => {
-        console.log(result);
-        const thisUserEmail = result.data.email;
+        console.log(result.email, result);
+        const thisUserEmail = result.email;
         setUserEmail(thisUserEmail);
         setIsLoggedIn(true);
         setIsSuccessful(true);
