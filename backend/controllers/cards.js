@@ -48,30 +48,15 @@ module.exports.createCard = (req, res) => {
 
 /** DELETE /cards/:cardId — deletes a card by _id */
 module.exports.deleteCard = (req, res, next) => {
-  Card.findByIdAndDelete(req.params.cardId)
+  Card.findById(req.params.cardId)
     .then((card) => {
-      if (card && (req.user._id.toString() === card.owner.toString())) {
-        res.status(200).send(card);
-      } else {
-        throw new Error404('cardId not found or User does not have the rights to delete this card');
-        /*
-        res.status(404).send({
-          message: 'cardId not found or User does not have the rights to delete this card',
-        }); */
+      if (!card) {
+        throw new Error400('Card ID is not valid');
       }
-    })
-    .catch((err) => {
-      console.log(err.name);
-      if (err.name === 'CastError') {
-        throw new Error400('Card Id is not valid');
-        /*
-        return res.status(400).send({
-          message: 'Card Id is not valid',
-        }); */
+      if (req.user._id.toString() !== card.owner.toString()) {
+        throw new Error404('You do not have the necessary rights to delete this card');
       }
-      return res.status(500).send({
-        message: 'card not deleted',
-      });
+      return Card.remove(card).then(() => { res.send({ data: card }); });
     })
     .catch(next);
 };
