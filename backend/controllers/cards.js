@@ -76,20 +76,12 @@ module.exports.likeCard = (req, res, next) => {
         res.status(200).send(card);
       } else {
         throw new Error404('cardId not found');
-        /*
-        res.status(404).send({
-          message: 'cardId not found',
-        }); */
       }
     })
     .catch((err) => {
       console.log(err.name);
       if (err.name === 'CastError') {
         throw new Error400('Card Id is not valid');
-        /*
-        return res.status(400).send({
-          message: 'Card Id is not valid',
-        }); */
       }
       return res.status(500).send({
         message: 'like not added',
@@ -113,20 +105,12 @@ module.exports.dislikeCard = (req, res, next) => {
         res.status(200).send(card);
       } else {
         throw new Error404('card Id not found');
-        /*
-        res.status(404).send({
-          message: 'card Id not found',
-        }); */
       }
     })
     .catch((err) => {
       console.log(err.name);
       if (err.name === 'CastError') {
         throw new Error400('card Id is not valid');
-        /*
-        return res.status(400).send({
-          message: 'Card Id is not valid',
-        }); */
       }
       return res.status(500).send({
         message: 'like not removed',
