@@ -14,7 +14,7 @@ class Authorize {
   }
 
 
-  //POST https://around.nomoreparties.co/signup
+  //POST https://www.api.theworldaround.co.uk/signup
   register(email, password) {
     return fetch(this._baseUrl + '/signup', {
       method: 'POST',
@@ -28,7 +28,7 @@ class Authorize {
     }).then((res) => this._checkResponse(res))
   }
 
-  //POST https://around.nomoreparties.co/signin
+  //POST https://www.api.theworldaround.co.uk/signin
   authorizeWithToken(email, password) {
     return fetch(this._baseUrl + '/signin', {
         method: 'POST',
@@ -49,7 +49,7 @@ class Authorize {
       })
   }
 
-  //GET https://around.nomoreparties.co/users/me
+  //GET https://www.api.theworldaround.co.uk/users/me
   checkTokenIsValid(jwt) {
     return fetch(this._baseUrl + '/users/me', {
       method: 'GET',
@@ -63,7 +63,7 @@ class Authorize {
 
 
 const authorize = new Authorize({
-  baseUrl: 'https://www.theworldaround.co.uk/api',
+  baseUrl: 'https://www.api.theworldaround.co.uk',
 })
 
 export default authorize;
