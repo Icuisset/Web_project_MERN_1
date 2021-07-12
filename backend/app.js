@@ -32,8 +32,8 @@ app.use(cookieParser());
 
 const { requestLog, errorLog } = require("./middleware/logger");
 const auth = require("./middleware/auth");
+const Error404 = require("./middleware/errors/Error400");
 
-// eslint-disable-next-line operator-linebreak
 // const uri =
 //  "mongodb+srv://isa:XEPhas731@@isabelledb.mltad.mongodb.net/arounddb?retryWrites=true&w=majority";
 
@@ -90,10 +90,8 @@ app.post(
 app.use("/users", auth, usersRouter);
 app.use("/cards", auth, cardsRouter);
 
-app.get("*", (req, res) => {
-  res.status(404).send({
-    message: "Requested resource not found",
-  });
+app.get("*", () => {
+  throw new Error404("requested resources not found");
 });
 
 // Error log
