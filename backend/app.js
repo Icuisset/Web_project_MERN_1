@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable comma-dangle */
 /* eslint-disable quotes */
 /* eslint-disable no-console */
@@ -10,6 +11,7 @@ const cookieParser = require("cookie-parser");
 // eslint-disable-next-line no-unused-vars
 const bodyParser = require("body-parser");
 require("dotenv").config();
+const validator = require("validator");
 
 const app = express();
 const { DB_CONNECT, PORT = 3000 } = process.env;
@@ -54,6 +56,16 @@ const cardsRouter = require("./routes/cards");
 
 const { signin, createUser } = require("./controllers/users");
 
+const method = (value) => {
+  // eslint-disable-next-line prefer-const
+  let result = validator.isURL(value);
+  if (result) {
+    return value;
+  } else {
+    throw new Error("URL validation err");
+  }
+};
+
 app.use(requestLog);
 
 app.get("/crash-test", () => {
@@ -79,7 +91,7 @@ app.post(
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string(),
+      avatar: Joi.string().required().custom(method),
       email: Joi.string().required().email(),
       password: Joi.string().required(),
     }),
