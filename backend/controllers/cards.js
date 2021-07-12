@@ -6,6 +6,7 @@
 const Card = require('../models/card');
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
+const Error403 = require("../middleware/errors/Error403");
 
 // eslint-disable-next-line no-multiple-empty-lines
 /** GET /cards — returns all cards */
@@ -54,7 +55,7 @@ module.exports.deleteCard = (req, res, next) => {
         throw new Error400('Card ID is not valid');
       }
       if (req.user._id.toString() !== card.owner.toString()) {
-        throw new Error404('You do not have the necessary rights to delete this card');
+        throw new Error403('You do not have the necessary rights to delete this card');
       }
       return Card.remove(card).then(() => { res.send({ data: card }); });
     })
