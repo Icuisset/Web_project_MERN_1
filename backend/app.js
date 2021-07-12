@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 
-const { requestLog, errorLog } = require("./middleware/logger");
+const { requestLog, errorLog } = require("./middleware/log/logger");
 const auth = require("./middleware/auth");
 const Error404 = require("./middleware/errors/Error400");
 

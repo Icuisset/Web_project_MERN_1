@@ -1,6 +1,18 @@
+/* eslint-disable no-else-return */
 /* eslint-disable no-console */
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+
+const method = (value) => {
+  // eslint-disable-next-line prefer-const
+  let result = validator.isURL(value);
+  if (result) {
+    return value;
+  } else {
+    throw new Error('URL validation err');
+  }
+};
 
 const router = express.Router();
 
@@ -27,7 +39,7 @@ router.patch('/me', celebrate({
 
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required().uri(),
+    avatar: Joi.string().required().custom(method),
   }),
 }), updateUserAvatar);
 

@@ -1,6 +1,18 @@
+/* eslint-disable no-else-return */
 /* eslint-disable no-console */
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+
+const method = (value) => {
+  // eslint-disable-next-line prefer-const
+  let result = validator.isURL(value);
+  if (result) {
+    return value;
+  } else {
+    throw new Error('URL validation err');
+  }
+};
 
 const router = express.Router();
 
@@ -17,7 +29,7 @@ router.get('/', getCards);
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.string().uri().required(),
+    link: Joi.string().required().custom(method),
   }),
 }), createCard);
 

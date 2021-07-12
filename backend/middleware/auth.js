@@ -1,5 +1,8 @@
 /* eslint-disable quotes */
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+const { JWT_SECRET } = process.env;
 
 const handleAuthError = (res) => {
   res.status(401).send({ message: "Authorization Error" });
@@ -22,7 +25,7 @@ module.exports = (req, res, next) => {
     payload = jwt.verify(
       token,
       // eslint-disable-next-line comma-dangle
-      "super-strong-secret"
+      JWT_SECRET
     );
   } catch (err) {
     return handleAuthError(res);
