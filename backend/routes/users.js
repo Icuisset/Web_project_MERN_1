@@ -14,6 +14,8 @@ const method = (value) => {
   }
 };
 
+// NB : could use as well : Joi.string().uri({ scheme: ['http', 'https'] }).required(),
+
 const router = express.Router();
 
 const {
@@ -28,7 +30,11 @@ router.get('/', getUsers);
 
 router.get('/me', findCurrentUser);
 
-router.get('/:id', findUser);
+router.get('/:id', celebrate({
+  params: Joi.object().keys({
+    id: Joi.string().hex().length(24),
+  }),
+}), findUser);
 
 router.patch('/me', celebrate({
   body: Joi.object().keys({

@@ -7,6 +7,7 @@ const Card = require('../models/card');
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
 const Error403 = require("../middleware/errors/Error403");
+const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
 /** GET /cards — returns all cards */
@@ -17,9 +18,7 @@ module.exports.getCards = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).send({
-        message: 'cards not found',
-      });
+      throw new Error500('Cards not found');
     });
 };
 
@@ -41,9 +40,7 @@ module.exports.createCard = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).send({
-        message: 'card not created',
-      });
+      throw new Error500('Card not created');
     });
 };
 
@@ -83,10 +80,9 @@ module.exports.likeCard = (req, res, next) => {
       console.log(err.name);
       if (err.name === 'CastError') {
         throw new Error400('Card Id is not valid');
+      } else {
+        throw new Error500('Card like not added');
       }
-      return res.status(500).send({
-        message: 'like not added',
-      });
     })
     .catch(next);
 };
@@ -112,10 +108,9 @@ module.exports.dislikeCard = (req, res, next) => {
       console.log(err.name);
       if (err.name === 'CastError') {
         throw new Error400('card Id is not valid');
+      } else {
+        throw new Error500('Card like not removed');
       }
-      return res.status(500).send({
-        message: 'like not removed',
-      });
     })
     .catch(next);
 };

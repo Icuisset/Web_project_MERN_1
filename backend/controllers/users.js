@@ -15,6 +15,8 @@ const User = require("../models/user");
 
 const Error400 = require("../middleware/errors/Error400");
 const Error404 = require("../middleware/errors/Error404");
+const Error409 = require("../middleware/errors/Error409");
+const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
 
@@ -90,9 +92,11 @@ module.exports.createUser = (req, res) => {
     })
     .catch((err) => {
       console.log(err.name);
-      res.status(500).send({
-        message: "user not created",
-      });
+      if (err.name === "MongoError" && err.code === 11000) {
+        throw new Error409("User exists already");
+      } else {
+        throw new Error500("User not created");
+      }
     });
 };
 

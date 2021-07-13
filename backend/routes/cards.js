@@ -14,6 +14,8 @@ const method = (value) => {
   }
 };
 
+// NB : could use as well : Joi.string().uri({ scheme: ['http', 'https'] }).required(),
+
 const router = express.Router();
 
 const {
