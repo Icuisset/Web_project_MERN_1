@@ -49,7 +49,7 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
-        throw new Error400('Card ID is not valid');
+        throw new Error404('Card ID is not valid');
       }
       if (req.user._id.toString() !== card.owner.toString()) {
         throw new Error403('You do not have the necessary rights to delete this card');
