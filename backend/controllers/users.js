@@ -72,7 +72,7 @@ module.exports.findCurrentUser = (req, res, next) => {
 };
 
 /** POST /users — creates a new user in SIGNUP */
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   console.log(req.body);
   const { name, about, avatar, email, password } = req.body;
 
@@ -97,7 +97,8 @@ module.exports.createUser = (req, res) => {
       } else {
         throw new Error500("User not created");
       }
-    });
+    })
+    .catch(next);
 };
 
 /** PATCH /users/me — update profile with my name and about */
@@ -164,7 +165,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
 };
 
 /** manage SIGN IN */
-module.exports.signin = (req, res) => {
+module.exports.signin = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
@@ -179,5 +180,6 @@ module.exports.signin = (req, res) => {
     })
     .catch((err) => {
       res.status(401).send({ message: err.message });
-    });
+    })
+    .catch(next);
 };

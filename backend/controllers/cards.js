@@ -11,7 +11,7 @@ const Error500 = require("../middleware/errors/Error500");
 
 // eslint-disable-next-line no-multiple-empty-lines
 /** GET /cards — returns all cards */
-module.exports.getCards = (req, res) => {
+module.exports.getCards = (req, res, next) => {
   Card.find({})
     .then((cards) => {
       res.status(200).send(cards);
@@ -19,11 +19,12 @@ module.exports.getCards = (req, res) => {
     .catch((err) => {
       console.log(err);
       throw new Error500('Cards not found');
-    });
+    })
+    .catch(next);
 };
 
 /** POST /cards — creates a new card */
-module.exports.createCard = (req, res) => {
+module.exports.createCard = (req, res, next) => {
   console.log(req.body);
   const owner = req.user._id;
   const {
@@ -41,7 +42,8 @@ module.exports.createCard = (req, res) => {
     .catch((err) => {
       console.log(err);
       throw new Error500('Card not created');
-    });
+    })
+    .catch(next);
 };
 
 /** DELETE /cards/:cardId — deletes a card by _id */
