@@ -83,7 +83,7 @@ module.exports.likeCard = (req, res, next) => {
       if (err.name === 'CastError') {
         throw new Error400('Card Id is not valid');
       } else {
-        throw new Error404('Card like not added');
+        throw new Error404('Card like was not added');
       }
     })
     .catch(next);
@@ -111,7 +111,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (err.name === 'CastError') {
         throw new Error400('card Id is not valid');
       } else {
-        throw new Error404('Card like not removed');
+        throw new Error404('Card like was not removed');
       }
     })
     .catch(next);
