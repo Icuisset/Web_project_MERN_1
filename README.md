@@ -1,7 +1,6 @@
-# react-around-api-full
-The API of "Around the U.S." with authorization and registration handled by the back-end server.
+# Web_project_MERN_1
 
-This repository contains the full API of "Travel around the world" project that features user authorization and user registration and handles cards and users. 
+This repository contains the full "Travel around the world" project that features user authorization and user registration and handles cards and users. 
 
 Link to the main deployment website ( on Google Cloud ) 
 * https://www.theworldaround.co.uk/
